@@ -41,5 +41,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'role_id'=> \App\Enums\Role::class
     ];
+
+     /**
+     * Related Exams
+     **/
+    public function options() {
+        return $this->hasMany(Option::class, 'question_id');
+    }
+
+    public function answers() {
+        return $this->hasMany(UserAnswer::class, 'user_id');
+    }
 }
